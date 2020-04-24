@@ -11,6 +11,11 @@ import matplotlib.pyplot as plt
 from pylab import*
 from control.matlab import *
 
+#if using termux
+import subprocess
+import shlex
+#end if
+
 #Defining the transfer function 
 s1 = signal.lti([1, 0.5],[1,2,1,0.5])
 sys = tf([1, 0.5],[1,2,1,0.5])
@@ -34,7 +39,9 @@ plt.title('Phase plot')
 plt.semilogx(w,phase)          # Bode phase plot
 plt.grid() 
 
-
-
-
-plt.show()
+#if using termux
+plt.savefig('./figs/ee17btech11031_1.pdf')
+plt.savefig('./figs/ee17btech11011_1.eps')
+subprocess.run(shlex.split("termux-open ./figs/ee17btech11031_1.pdf"))
+#else
+#plt.show()
